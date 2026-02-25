@@ -1,29 +1,25 @@
 # Ares - Market Intelligence Dashboard
 
-A personal financial dashboard featuring blue-chip stock tracking with valuation, performance, and risk metrics. Supplemented by a US Treasury yield curve visualization and live market/stock news from Refinitiv Eikon.
+A personal financial dashboard which includes blue chip stocks, following their valuation, performance, and risk. Supplementing this dashboard is a yield curve visualization for the 2,10, and 30Y Treasury Yields with a market/stock news extrapolator for contextual insights.
 
 ## Features
 
-- **Equity Watchlist** -- real-time prices, 24h/7d/30d performance, volatility, beta, Sharpe ratio, and market cap across Technology, Consumer, Financials, Defense, Energy, Healthcare, and Crypto sectors
-- **US Treasury Yield Curve** -- live 1M through 30Y yields rendered with Recharts
-- **Live News** -- English-filtered headlines pulled from Refinitiv Eikon for both individual stocks and the broader rates/macro market, refreshed every 5 minutes
-- **Auto-refresh** -- watchlist updates every 15 s, yield curve every 60 s, news every 5 min
+- **Watchlist Table**: Track multiple stocks across different sectors (Technology, Consumer, Financials, Defense, Energy, Healthcare, Crypto)
+- **US Treasury Yield Curve**: Visualize the current yield curve with key rates and historical changes
+- **Live News Headlines**: English-filtered stock and market news pulled from Refinitiv Eikon, refreshed every 5 minutes
+- **Responsive Design**: Fully scalable interface that adapts to your browser size
+- **Performance Metrics**: Monitor 24h, 7d, and 30d performance across your portfolio
+- **Risk Analysis**: View volatility, beta, correlation, and Sharpe ratios
+- **Auto-Refresh**: Watchlist updates every 15s, yield curve every 60s, news every 5 min
 
 ## Tech Stack
 
-| Layer | Stack |
-|-------|-------|
-| Frontend | React 19 + Vite, Recharts |
-| Backend API | Flask, Flask-CORS |
-| Data | Refinitiv Eikon Data API (`eikon`) |
-| Scheduling | Custom background thread (single-threaded to avoid Eikon async clashes) |
-| Language detection | `langdetect` (filters non-English headlines) |
-
-## Prerequisites
-
 - **Python 3.10+**
-- **Node.js 18+** and npm
-- **Refinitiv Eikon Workspace** running on the same machine (the `eikon` library connects to it locally)
+- **React 19** + **Vite** - Frontend framework and build tool
+- **Recharts** - Charting library
+- **Flask** - API backend
+- **Refinitiv Eikon** - Financial data retrieval (real-time, via Eikon Workspace desktop)
+- **Pandas** - Data manipulation
 
 ## Setup
 
@@ -49,50 +45,66 @@ A personal financial dashboard featuring blue-chip stock tracking with valuation
    npm install
    ```
 
-## Running
+5. **Eikon Workspace must be running** on the same machine. The `eikon` library connects to it locally for authentication.
 
-Start both servers (from the project root):
+## Running the Dashboard
 
-```bash
-# Terminal 1 -- API backend (port 5001)
-python ares/api.py
+1. Start the API backend:
+   ```bash
+   python ares/api.py
+   ```
 
-# Terminal 2 -- React frontend (port 3000)
-cd frontend && npx vite --port 3000
-```
+2. Start the React frontend:
+   ```bash
+   cd frontend && npx vite --port 3000
+   ```
 
-Open **http://localhost:3000** in your browser.
+3. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
 
 ## Project Structure
 
 ```
-Ares-/
-├── .env                          # Eikon API key (not committed)
-├── .gitignore
+ares/
 ├── ares/
 │   ├── api.py                    # Flask API: watchlist, yield curve, news
 │   ├── dashboard.py              # Legacy Dash-based dashboard
-│   ├── README.md
-│   └── ares/Notebooks/
-│       └── test_notebook.ipynb   # Exploratory notebook
-└── frontend/
-    ├── index.html
-    ├── package.json
-    ├── vite.config.js
-    └── src/
-        ├── App.jsx               # Main app component + polling hooks
-        ├── App.css               # Global styles
-        ├── main.jsx
-        └── components/
-            ├── Watchlist.jsx     # Equity table
-            ├── YieldCurve.jsx    # Treasury curve chart
-            └── NewsColumn.jsx    # Live headlines column
+│   ├── ares/
+│   │   └── Notebooks/
+│   │       └── test_notebook.ipynb
+│   └── README.md
+├── frontend/
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── App.jsx               # Main app component + polling hooks
+│       ├── App.css               # Global styles
+│       ├── main.jsx
+│       └── components/
+│           ├── Watchlist.jsx     # Equity table
+│           ├── YieldCurve.jsx    # Treasury curve chart
+│           └── NewsColumn.jsx    # Live headlines column
+└── .gitignore
 ```
 
-## Design
+## Features in Development
 
-Professional hedge-fund aesthetic with a warm tan/beige palette, information-dense layout, and responsive scaling.
+- Additional charting components
+- Click-through stock details
+- Portfolio analytics
+- Alert notifications
+
+## Design Philosophy
+
+The dashboard is designed with a professional, hedge fund-style aesthetic featuring:
+- Warm tan and beige color palette
+- Tight, information-dense layouts
+- Clean typography and spacing
+- Responsive scaling for different screen sizes
 
 ---
 
-Built for market intelligence.
+Built with ❤️ for market intelligence
