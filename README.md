@@ -107,4 +107,4 @@ The dashboard is designed with a professional, hedge fund-style aesthetic featur
 
 ---
 
-Built with ❤️ for market intelligence
+
